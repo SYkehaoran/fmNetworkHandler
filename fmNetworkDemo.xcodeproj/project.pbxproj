@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		51D2B59C39140F7C124BCA9D /* libPods-fmNetworkDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59C33C2D0EC54A650B994CD5 /* libPods-fmNetworkDemo.a */; };
 		A6C7C93F2124279D00525A6E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C7C93E2124279D00525A6E /* AppDelegate.m */; };
 		A6C7C9422124279D00525A6E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C7C9412124279D00525A6E /* ViewController.m */; };
 		A6C7C9452124279D00525A6E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6C7C9432124279D00525A6E /* Main.storyboard */; };
@@ -15,6 +16,13 @@
 		A6C7C94D2124279E00525A6E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C7C94C2124279E00525A6E /* main.m */; };
 		A6C7C9572124279E00525A6E /* fmNetworkDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C7C9562124279E00525A6E /* fmNetworkDemoTests.m */; };
 		A6C7C9622124279E00525A6E /* fmNetworkDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C7C9612124279E00525A6E /* fmNetworkDemoUITests.m */; };
+		A6C7C97E212427AC00525A6E /* fmNetworkPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C7C970212427AC00525A6E /* fmNetworkPrivate.m */; };
+		A6C7C97F212427AC00525A6E /* fmReqeustSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C7C971212427AC00525A6E /* fmReqeustSerializer.m */; };
+		A6C7C980212427AC00525A6E /* fmNetworkAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C7C972212427AC00525A6E /* fmNetworkAgent.m */; };
+		A6C7C981212427AC00525A6E /* fmBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C7C973212427AC00525A6E /* fmBaseRequest.m */; };
+		A6C7C982212427AC00525A6E /* fmRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C7C974212427AC00525A6E /* fmRequest.m */; };
+		A6C7C983212427AC00525A6E /* fmNetworkConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C7C975212427AC00525A6E /* fmNetworkConfig.m */; };
+		A6C7C987212428DD00525A6E /* fmResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C7C986212428DD00525A6E /* fmResponseSerializer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		59C33C2D0EC54A650B994CD5 /* libPods-fmNetworkDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fmNetworkDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C3A3C58CB2837B75F15FF5B /* Pods-fmNetworkDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fmNetworkDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-fmNetworkDemo/Pods-fmNetworkDemo.release.xcconfig"; sourceTree = "<group>"; };
 		A6C7C93A2124279D00525A6E /* fmNetworkDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fmNetworkDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6C7C93D2124279D00525A6E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A6C7C93E2124279D00525A6E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -51,6 +61,21 @@
 		A6C7C95D2124279E00525A6E /* fmNetworkDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fmNetworkDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6C7C9612124279E00525A6E /* fmNetworkDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = fmNetworkDemoUITests.m; sourceTree = "<group>"; };
 		A6C7C9632124279E00525A6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A6C7C970212427AC00525A6E /* fmNetworkPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fmNetworkPrivate.m; sourceTree = "<group>"; };
+		A6C7C971212427AC00525A6E /* fmReqeustSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fmReqeustSerializer.m; sourceTree = "<group>"; };
+		A6C7C972212427AC00525A6E /* fmNetworkAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fmNetworkAgent.m; sourceTree = "<group>"; };
+		A6C7C973212427AC00525A6E /* fmBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fmBaseRequest.m; sourceTree = "<group>"; };
+		A6C7C974212427AC00525A6E /* fmRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fmRequest.m; sourceTree = "<group>"; };
+		A6C7C975212427AC00525A6E /* fmNetworkConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fmNetworkConfig.m; sourceTree = "<group>"; };
+		A6C7C977212427AC00525A6E /* fmNetworkAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fmNetworkAgent.h; sourceTree = "<group>"; };
+		A6C7C978212427AC00525A6E /* fmReqeustSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fmReqeustSerializer.h; sourceTree = "<group>"; };
+		A6C7C979212427AC00525A6E /* fmNetworkPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fmNetworkPrivate.h; sourceTree = "<group>"; };
+		A6C7C97A212427AC00525A6E /* fmNetworkConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fmNetworkConfig.h; sourceTree = "<group>"; };
+		A6C7C97B212427AC00525A6E /* fmRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fmRequest.h; sourceTree = "<group>"; };
+		A6C7C97C212427AC00525A6E /* fmBaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fmBaseRequest.h; sourceTree = "<group>"; };
+		A6C7C985212428DD00525A6E /* fmResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fmResponseSerializer.h; sourceTree = "<group>"; };
+		A6C7C986212428DD00525A6E /* fmResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fmResponseSerializer.m; sourceTree = "<group>"; };
+		EA8F7AF3B9232CF18D9B7289 /* Pods-fmNetworkDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fmNetworkDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fmNetworkDemo/Pods-fmNetworkDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51D2B59C39140F7C124BCA9D /* libPods-fmNetworkDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,13 +104,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		15B052101B7F60B8000ADEA4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EA8F7AF3B9232CF18D9B7289 /* Pods-fmNetworkDemo.debug.xcconfig */,
+				6C3A3C58CB2837B75F15FF5B /* Pods-fmNetworkDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		27CBF917CCD8121B69BEC418 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				59C33C2D0EC54A650B994CD5 /* libPods-fmNetworkDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A6C7C9312124279D00525A6E = {
 			isa = PBXGroup;
 			children = (
+				A6C7C96F212427AC00525A6E /* fmNetwork */,
 				A6C7C93C2124279D00525A6E /* fmNetworkDemo */,
 				A6C7C9552124279E00525A6E /* fmNetworkDemoTests */,
 				A6C7C9602124279E00525A6E /* fmNetworkDemoUITests */,
 				A6C7C93B2124279D00525A6E /* Products */,
+				15B052101B7F60B8000ADEA4 /* Pods */,
+				27CBF917CCD8121B69BEC418 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,6 +178,27 @@
 			path = fmNetworkDemoUITests;
 			sourceTree = "<group>";
 		};
+		A6C7C96F212427AC00525A6E /* fmNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				A6C7C979212427AC00525A6E /* fmNetworkPrivate.h */,
+				A6C7C970212427AC00525A6E /* fmNetworkPrivate.m */,
+				A6C7C978212427AC00525A6E /* fmReqeustSerializer.h */,
+				A6C7C971212427AC00525A6E /* fmReqeustSerializer.m */,
+				A6C7C977212427AC00525A6E /* fmNetworkAgent.h */,
+				A6C7C972212427AC00525A6E /* fmNetworkAgent.m */,
+				A6C7C97C212427AC00525A6E /* fmBaseRequest.h */,
+				A6C7C973212427AC00525A6E /* fmBaseRequest.m */,
+				A6C7C97B212427AC00525A6E /* fmRequest.h */,
+				A6C7C974212427AC00525A6E /* fmRequest.m */,
+				A6C7C97A212427AC00525A6E /* fmNetworkConfig.h */,
+				A6C7C975212427AC00525A6E /* fmNetworkConfig.m */,
+				A6C7C985212428DD00525A6E /* fmResponseSerializer.h */,
+				A6C7C986212428DD00525A6E /* fmResponseSerializer.m */,
+			);
+			path = fmNetwork;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -139,9 +206,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A6C7C9662124279E00525A6E /* Build configuration list for PBXNativeTarget "fmNetworkDemo" */;
 			buildPhases = (
+				788D78A05874E063BA1DF820 /* [CP] Check Pods Manifest.lock */,
 				A6C7C9362124279D00525A6E /* Sources */,
 				A6C7C9372124279D00525A6E /* Frameworks */,
 				A6C7C9382124279D00525A6E /* Resources */,
+				A840A62F1BBA90FFBD5B33E7 /* [CP] Embed Pods Frameworks */,
+				D32AA69FBAE3A376A6131A9D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -257,14 +327,72 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		788D78A05874E063BA1DF820 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-fmNetworkDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A840A62F1BBA90FFBD5B33E7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fmNetworkDemo/Pods-fmNetworkDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D32AA69FBAE3A376A6131A9D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fmNetworkDemo/Pods-fmNetworkDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A6C7C9362124279D00525A6E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				A6C7C9422124279D00525A6E /* ViewController.m in Sources */,
+				A6C7C981212427AC00525A6E /* fmBaseRequest.m in Sources */,
+				A6C7C982212427AC00525A6E /* fmRequest.m in Sources */,
+				A6C7C987212428DD00525A6E /* fmResponseSerializer.m in Sources */,
+				A6C7C97E212427AC00525A6E /* fmNetworkPrivate.m in Sources */,
+				A6C7C97F212427AC00525A6E /* fmReqeustSerializer.m in Sources */,
 				A6C7C94D2124279E00525A6E /* main.m in Sources */,
 				A6C7C93F2124279D00525A6E /* AppDelegate.m in Sources */,
+				A6C7C983212427AC00525A6E /* fmNetworkConfig.m in Sources */,
+				A6C7C980212427AC00525A6E /* fmNetworkAgent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +559,7 @@
 		};
 		A6C7C9672124279E00525A6E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EA8F7AF3B9232CF18D9B7289 /* Pods-fmNetworkDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -448,6 +577,7 @@
 		};
 		A6C7C9682124279E00525A6E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6C3A3C58CB2837B75F15FF5B /* Pods-fmNetworkDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
