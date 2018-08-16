@@ -57,7 +57,13 @@ typedef void(^fmRequestCompletionBlock)(__kindof fmBaseRequest *request);
 - (void)saveResponseToFile:(id)responseObject;
 
 - (void)start;
+- (void)stop;
 - (void)startWithCompletionBlockWithSuccess:(fmRequestCompletionBlock)success failure:(fmRequestCompletionBlock)failure;
 
 - (void)clearCompletionBlock;
+
+///  Additional HTTP request header field.
+- (nullable NSDictionary<NSString *, NSString *> *)requestHeaderFieldValueDictionary;
+
+
 @end

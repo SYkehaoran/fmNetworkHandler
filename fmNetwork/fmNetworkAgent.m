@@ -105,7 +105,7 @@ static fmNetworkAgent *_instance = nil;
     NSString *url = [self bulidUrlWithRequest:request];
     id parm = [self handleParameterWithRequest:request error:nil];
     fmRequestMethod method = [request.child requestMethod];
-    AFHTTPRequestSerializer *requestSerializer = [[AFJSONRequestSerializer alloc] init];
+    AFHTTPRequestSerializer *requestSerializer = [self requestSerializerWithRequest:request];
     
     switch (method) {
         case fmRequestMethodGET:
@@ -127,7 +127,19 @@ static fmNetworkAgent *_instance = nil;
     }];
     return task;
 }
-
+- (AFHTTPRequestSerializer *)requestSerializerWithRequest:(fmBaseRequest *)request {
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    requestSerializer.timeoutInterval = [request timeoutInterval];
+    // if api need custom headFile
+    NSDictionary <NSString *, NSString *> * headerFieldValueDictionary = [request requestHeaderFieldValueDictionary];
+    if (headFileDic !=nil) {
+        for (NSString * httpHeaderField in headerFieldValueDictionary.allKeys) {
+            NSString *value = headerFieldValueDictionary[httpHeaderField];
+            [requestSerializer setValue:value forHTTPHeaderField:httpHeaderField];
+        }
+    }
+    return requestSerializer;
+}
 - (void)handlerRequestResult:(NSURLSessionTask *)task responseObject:(id)responseObject error:(NSError *)error {
     
     fmBaseRequest *request = _requestsRecord[@(task.taskIdentifier)];

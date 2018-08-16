@@ -68,7 +68,9 @@
 - (void)start {
     [[fmNetworkAgent sharedAgent] addRequest:self];
 }
-
+- (void)stop {
+     [[fmNetworkAgent sharedAgent] cancelRequest:self];
+}
 - (void)clearCompletionBlock {
     self.successCompletionBlock = nil;
     self.failureCompletionBlock = nil;
@@ -136,4 +138,7 @@
     [self saveResponseToFile:self.responseData];
 }
 
+- (nullable NSDictionary<NSString *, NSString *> *)requestHeaderFieldValueDictionary {
+    return nil;
+}
 @end
