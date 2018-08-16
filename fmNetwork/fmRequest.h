@@ -15,9 +15,7 @@
 
 - (BOOL)loadCacheWithError:(NSError *)error;
 
-- (void)start;
 - (void)stop;
 
 - (void)startWithOutCache;
-- (void)startWithCompletionBlockWithSuccess:(fmRequestCompletionBlock)success failure:(fmRequestCompletionBlock)failure;
 @end

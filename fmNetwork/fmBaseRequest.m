@@ -8,14 +8,15 @@
 
 #import "fmBaseRequest.h"
 #import "fmNetworkPrivate.h"
+#import "fmNetworkAgent.h"
 @interface fmBaseRequest()
 
 @property(nonatomic, strong, readwrite) NSError *error;
 @property(nonatomic, strong, readwrite) NSURLSessionTask *task;
 @property(nonatomic, strong, readwrite) id<fmRequestProtocol> child;
 @property(nonatomic, strong, readwrite) id responseJSONObject;//JSON转译之后的数据
-@property(nonatomic, strong, readwrite) NSData *responseData;//原始数据
 @property(nonatomic, strong, readwrite) id responseObject;//其他方式转译之后的数据
+@property(nonatomic, strong, readwrite) NSData *responseData;//原始数据
 
 @end
 
@@ -42,11 +43,37 @@
 - (fmResponseSerializerType)responseSerializerType {
     return fmResponseSerializerTypeJSON;
 }
+
+- (NSInteger)timeoutInterval {
+    return 60;
+}
+
 - (BOOL)statusCodeValidator:(NSError * __autoreleasing *)error {
     
     
     return YES;
 }
+
+- (void)setCompletionBlockWithSuccess:(fmRequestCompletionBlock)success failure:(fmRequestCompletionBlock)failure {
+    self.successCompletionBlock = success;
+    self.failureCompletionBlock = failure;
+}
+
+- (void)startWithCompletionBlockWithSuccess:(fmRequestCompletionBlock)success failure:(fmRequestCompletionBlock)failure {
+    
+    [self setCompletionBlockWithSuccess:success failure:failure];
+    [self start];
+}
+
+- (void)start {
+    [[fmNetworkAgent sharedAgent] addRequest:self];
+}
+
+- (void)clearCompletionBlock {
+    self.successCompletionBlock = nil;
+    self.failureCompletionBlock = nil;
+}
+
 - (void)saveResponseToFile:(id)responseObject {
     
     NSString *cacheFile = [self getCacheFile];

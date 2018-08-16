@@ -14,8 +14,6 @@
 		A6C7C9472124279E00525A6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6C7C9462124279E00525A6E /* Assets.xcassets */; };
 		A6C7C94A2124279E00525A6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6C7C9482124279E00525A6E /* LaunchScreen.storyboard */; };
 		A6C7C94D2124279E00525A6E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C7C94C2124279E00525A6E /* main.m */; };
-		A6C7C9572124279E00525A6E /* fmNetworkDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C7C9562124279E00525A6E /* fmNetworkDemoTests.m */; };
-		A6C7C9622124279E00525A6E /* fmNetworkDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C7C9612124279E00525A6E /* fmNetworkDemoUITests.m */; };
 		A6C7C97E212427AC00525A6E /* fmNetworkPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C7C970212427AC00525A6E /* fmNetworkPrivate.m */; };
 		A6C7C97F212427AC00525A6E /* fmReqeustSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C7C971212427AC00525A6E /* fmReqeustSerializer.m */; };
 		A6C7C980212427AC00525A6E /* fmNetworkAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C7C972212427AC00525A6E /* fmNetworkAgent.m */; };
@@ -56,11 +54,7 @@
 		A6C7C94B2124279E00525A6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6C7C94C2124279E00525A6E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A6C7C9522124279E00525A6E /* fmNetworkDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fmNetworkDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A6C7C9562124279E00525A6E /* fmNetworkDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = fmNetworkDemoTests.m; sourceTree = "<group>"; };
-		A6C7C9582124279E00525A6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6C7C95D2124279E00525A6E /* fmNetworkDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fmNetworkDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A6C7C9612124279E00525A6E /* fmNetworkDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = fmNetworkDemoUITests.m; sourceTree = "<group>"; };
-		A6C7C9632124279E00525A6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6C7C970212427AC00525A6E /* fmNetworkPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fmNetworkPrivate.m; sourceTree = "<group>"; };
 		A6C7C971212427AC00525A6E /* fmReqeustSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fmReqeustSerializer.m; sourceTree = "<group>"; };
 		A6C7C972212427AC00525A6E /* fmNetworkAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fmNetworkAgent.m; sourceTree = "<group>"; };
@@ -126,8 +120,6 @@
 			children = (
 				A6C7C96F212427AC00525A6E /* fmNetwork */,
 				A6C7C93C2124279D00525A6E /* fmNetworkDemo */,
-				A6C7C9552124279E00525A6E /* fmNetworkDemoTests */,
-				A6C7C9602124279E00525A6E /* fmNetworkDemoUITests */,
 				A6C7C93B2124279D00525A6E /* Products */,
 				15B052101B7F60B8000ADEA4 /* Pods */,
 				27CBF917CCD8121B69BEC418 /* Frameworks */,
@@ -158,24 +150,6 @@
 				A6C7C94C2124279E00525A6E /* main.m */,
 			);
 			path = fmNetworkDemo;
-			sourceTree = "<group>";
-		};
-		A6C7C9552124279E00525A6E /* fmNetworkDemoTests */ = {
-			isa = PBXGroup;
-			children = (
-				A6C7C9562124279E00525A6E /* fmNetworkDemoTests.m */,
-				A6C7C9582124279E00525A6E /* Info.plist */,
-			);
-			path = fmNetworkDemoTests;
-			sourceTree = "<group>";
-		};
-		A6C7C9602124279E00525A6E /* fmNetworkDemoUITests */ = {
-			isa = PBXGroup;
-			children = (
-				A6C7C9612124279E00525A6E /* fmNetworkDemoUITests.m */,
-				A6C7C9632124279E00525A6E /* Info.plist */,
-			);
-			path = fmNetworkDemoUITests;
 			sourceTree = "<group>";
 		};
 		A6C7C96F212427AC00525A6E /* fmNetwork */ = {
@@ -400,7 +374,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6C7C9572124279E00525A6E /* fmNetworkDemoTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,7 +381,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6C7C9622124279E00525A6E /* fmNetworkDemoUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

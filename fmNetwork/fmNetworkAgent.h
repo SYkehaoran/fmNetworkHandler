@@ -11,4 +11,5 @@
 @interface fmNetworkAgent : NSObject
 + (instancetype)sharedAgent;
 - (void)addRequest:(fmBaseRequest *)request;
+- (void)cancelRequest:(fmBaseRequest *)request;
 @end

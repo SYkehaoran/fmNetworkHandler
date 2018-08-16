@@ -7,13 +7,16 @@
 //
 
 #import "fmNetworkAgent.h"
-#import "fmBaseRequest.h"
 #import "fmNetworkPrivate.h"
 #import "AFNetworking.h"
 #import "fmNetworkConfig.h"
-
+#import <pthread/pthread.h>
+#define Lock() pthread_mutex_lock(&_lock)
+#define Unlock() pthread_mutex_unlock(&_lock)
 static fmNetworkAgent *_instance = nil;
 @implementation fmNetworkAgent{
+    
+    pthread_mutex_t _lock;
     
     AFHTTPSessionManager *_manager;
     NSMutableDictionary <NSNumber *, fmBaseRequest *>* _requestsRecord;
@@ -54,6 +57,7 @@ static fmNetworkAgent *_instance = nil;
         _config = [fmNetworkConfig sharedConfig];
         _manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:_config.sessionConfig];
         _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        pthread_mutex_init(&_lock, NULL);
         _requestsRecord = [NSMutableDictionary dictionary];
     }
     return self;
@@ -79,10 +83,23 @@ static fmNetworkAgent *_instance = nil;
     [request.task resume];
 }
 
-- (void)addRequestToRecord:(fmBaseRequest *)request {
-    _requestsRecord[@(request.task.taskIdentifier)] = request;
+- (void)cancelRequest:(fmBaseRequest *)request {
+
+    [request.task cancel];
+    [request clearCompletionBlock];
+    [self removeRecordWithRequest:request];
 }
 
+- (void)addRequestToRecord:(fmBaseRequest *)request {
+    Lock();
+    _requestsRecord[@(request.task.taskIdentifier)] = request;
+    Unlock();
+}
+- (void)removeRecordWithRequest:(fmBaseRequest *)request {
+    Lock();
+    [_requestsRecord removeObjectForKey:@(request.task.taskIdentifier)];
+    Unlock();
+}
 - (NSURLSessionTask *)sessionTaskForRequest:(fmBaseRequest *)request error:(NSError * _Nullable __autoreleasing *)error {
     
     NSString *url = [self bulidUrlWithRequest:request];
@@ -115,13 +132,11 @@ static fmNetworkAgent *_instance = nil;
     
     fmBaseRequest *request = _requestsRecord[@(task.taskIdentifier)];
     
-    if (error) {
-        
-        [self requestDidFailureRequest:request error:error];
-        return;
-    }
-    
     NSError *serializerError = nil;
+    NSError *validationError = nil;
+    NSError *requestError = nil;
+    BOOL success = NO;
+    
     if ([responseObject isKindOfClass:[NSData class]]) {
         request.responseData = responseObject;
         switch ([request responseSerializerType]) {
@@ -130,26 +145,34 @@ static fmNetworkAgent *_instance = nil;
                 break;
             case fmResponseSerializerTypeJSON:
                 request.responseJSONObject = [[self jsonResponseSerializer] responseObjectForResponse:task.response data:responseObject error:&serializerError];
-                
+                break;
             case fmResponseSerializerTypeXML:
                 request.responseObject = [[self xmlParserResponseSeralizer] responseObjectForResponse:task.response data:responseObject error:&serializerError];
+                break;
             default:
                 break;
         }
-        
     }
     
-    NSError *validationError = nil;
-    BOOL success = [self validateResult:request error:&validationError];
-    if (validationError) {
-        [self requestDidFailureRequest:request error:validationError];
-        return;
+    if (error) {
+        success = NO;
+        requestError = error;
+    }else if(serializerError) {
+        success = NO;
+        requestError = serializerError;
+    }else {
+        success = [self validateResult:request error:&validationError];
+        requestError = validationError;
     }
     
     if (success) {
         
         [self requestDidSuccessRequest:request];
+    }else {
+        [self requestDidFailureRequest:request error:requestError];
     }
+    [self removeRecordWithRequest:request];
+    [request clearCompletionBlock];
 }
 
 - (BOOL)validateResult:(fmBaseRequest *)request error:(NSError * _Nullable __autoreleasing *)error {

@@ -7,9 +7,9 @@
 //
 #import <Foundation/Foundation.h>
 
+
 typedef NS_ENUM(NSUInteger, fmRequestMethod) {
     fmRequestMethodGET,
-    
 };
 
 typedef NS_ENUM(NSUInteger, fmResponseSerializerType) {
@@ -29,7 +29,6 @@ typedef void(^fmRequestCompletionBlock)(__kindof fmBaseRequest *request);
 
 @end
 
-
 @interface fmBaseRequest : NSObject
 
 @property(nonatomic, strong, readonly) NSURLSessionTask *task;
@@ -40,18 +39,25 @@ typedef void(^fmRequestCompletionBlock)(__kindof fmBaseRequest *request);
 @property(nonatomic, strong, readonly) id responseObject;
 ///原始数据
 @property(nonatomic, strong, readonly) NSData *responseData;
+
 @property(nonatomic, strong, readonly) NSError *error;
+
 @property(nonatomic, copy, nullable) fmRequestCompletionBlock successCompletionBlock;
 @property(nonatomic, copy, nullable) fmRequestCompletionBlock failureCompletionBlock;
 
 
 - (NSString *)baseUrl;
 - (fmResponseSerializerType)responseSerializerType;
+- (NSInteger)timeoutInterval;
 
 - (BOOL)statusCodeValidator:(NSError * __autoreleasing *)error;
 - (id)encryptParameters:(id)params error:(NSError * _Nullable __autoreleasing *)error;
-- (void)requestDidSuccessComplition;
 
+- (void)requestDidSuccessComplition;
 - (void)saveResponseToFile:(id)responseObject;
 
+- (void)start;
+- (void)startWithCompletionBlockWithSuccess:(fmRequestCompletionBlock)success failure:(fmRequestCompletionBlock)failure;
+
+- (void)clearCompletionBlock;
 @end

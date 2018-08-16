@@ -7,11 +7,13 @@
 //
 
 #import "fmRequest.h"
-#import "fmNetworkAgent.h"
+
 #import "fmResponseSerializer.h"
 #import "fmReqeustSerializer.h"
 
 @interface fmRequest ()
+///最终使用的数据
+@property(nonatomic, strong, readwrite) id responseJSONDataValue;
 @end
 
 @implementation fmRequest
@@ -33,25 +35,16 @@
     return NO;
 }
 
-- (void)startWithCompletionBlockWithSuccess:(fmRequestCompletionBlock)success failure:(fmRequestCompletionBlock)failure {
- 
-    [self setCompletionBlockWithSuccess:success failure:failure];
-    [self start];
-}
-
-- (void)setCompletionBlockWithSuccess:(fmRequestCompletionBlock)success failure:(fmRequestCompletionBlock)failure {
-    self.successCompletionBlock = success;
-    self.failureCompletionBlock = failure;
-}
-
 - (void)start {
     
     if (!_ignoreCache) {
         [self startWithOutCache];
+        return;
     }
     
     if (![self loadCacheWithError:nil]) {
         [self startWithOutCache];
+        return;
     }
     
     if (self.successCompletionBlock) {
@@ -61,7 +54,7 @@
 
 - (void)startWithOutCache {
     
-    [[fmNetworkAgent sharedAgent] addRequest:self];
+    [super start];
 }
 
 - (void)stop {
@@ -69,9 +62,8 @@
 }
 - (BOOL)statusCodeValidator:(NSError * __autoreleasing *)error {
     
-    BOOL validate = [fmResponseSerializer validateResponseJSONObject:self.responseJSONObject error:error];
-    
-    return validate;
+
+    return YES;
 }
 - (id)encryptParameters:(id)params error:(NSError * _Nullable __autoreleasing *)error {
     return [fmReqeustSerializer encryptParameters:params error:error];
