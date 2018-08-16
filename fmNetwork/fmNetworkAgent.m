@@ -132,7 +132,7 @@ static fmNetworkAgent *_instance = nil;
     requestSerializer.timeoutInterval = [request timeoutInterval];
     // if api need custom headFile
     NSDictionary <NSString *, NSString *> * headerFieldValueDictionary = [request requestHeaderFieldValueDictionary];
-    if (headFileDic !=nil) {
+    if (headerFieldValueDictionary !=nil) {
         for (NSString * httpHeaderField in headerFieldValueDictionary.allKeys) {
             NSString *value = headerFieldValueDictionary[httpHeaderField];
             [requestSerializer setValue:value forHTTPHeaderField:httpHeaderField];
