@@ -100,32 +100,46 @@ static fmNetworkAgent *_instance = nil;
     [_requestsRecord removeObjectForKey:@(request.task.taskIdentifier)];
     Unlock();
 }
+
 - (NSURLSessionTask *)sessionTaskForRequest:(fmBaseRequest *)request error:(NSError * _Nullable __autoreleasing *)error {
     
     NSString *url = [self bulidUrlWithRequest:request];
     id parm = [self handleParameterWithRequest:request error:nil];
     fmRequestMethod method = [request.child requestMethod];
     AFHTTPRequestSerializer *requestSerializer = [self requestSerializerWithRequest:request];
-    
+    AFConstructingBlock constructingBlock = [request constructingBlock];
     switch (method) {
         case fmRequestMethodGET:
             return [self dataTaskWithHttpMethod:@"GET" requestSerializer:requestSerializer URLString:url parameters:parm error:error];
+            break;
+        case fmRequestMethodPOST:
+            return [self dataTaskWithHttpMethod:@"POST" requestSerializer:requestSerializer URLString:url parameters:parm error:error];
             break;
         default:
             break;
     }
 }
+- (NSURLSessionTask *)dataTaskWithHttpMethod:(NSString *)method requestSerializer:(AFHTTPRequestSerializer *)requestSerializer constructingBlock:(AFConstructingBlock)constructingBlock URLString:(NSString *)url parameters:(id)parm error:(NSError * _Nullable __autoreleasing *)error {
+    
+    NSURLRequest *request;
+    if (constructingBlock) {
+        
+        request = [requestSerializer multipartFormRequestWithMethod:method URLString:url parameters:parm constructingBodyWithBlock:constructingBlock error:error];
+    }else {
+        request = [requestSerializer requestWithMethod:method URLString:url parameters:parm error:error];
 
-- (NSURLSessionTask *)dataTaskWithHttpMethod:(NSString *)method requestSerializer:(AFHTTPRequestSerializer *)requestSerializer URLString:(NSString *)url parameters:(id)parm error:(NSError * _Nullable __autoreleasing *)error {
+    }
     
-    NSURLRequest *request = [requestSerializer requestWithMethod:method URLString:url parameters:parm error:error];
-    
-    __block NSURLSessionTask *task = nil;
+    __block NSURLSessionDataTask *task = nil;
     task = [_manager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         
         [self handlerRequestResult:task responseObject:responseObject error:error];
     }];
     return task;
+}
+- (NSURLSessionTask *)dataTaskWithHttpMethod:(NSString *)method requestSerializer:(AFHTTPRequestSerializer *)requestSerializer URLString:(NSString *)url parameters:(id)parm error:(NSError * _Nullable __autoreleasing *)error {
+    
+    return [self dataTaskWithHttpMethod:method requestSerializer:requestSerializer constructingBlock:nil URLString:url parameters:parm error:error];
 }
 - (AFHTTPRequestSerializer *)requestSerializerWithRequest:(fmBaseRequest *)request {
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -140,6 +154,7 @@ static fmNetworkAgent *_instance = nil;
     }
     return requestSerializer;
 }
+
 - (void)handlerRequestResult:(NSURLSessionTask *)task responseObject:(id)responseObject error:(NSError *)error {
     
     fmBaseRequest *request = _requestsRecord[@(task.taskIdentifier)];
@@ -208,6 +223,7 @@ static fmNetworkAgent *_instance = nil;
         request.failureCompletionBlock(request);
     }
 }
+
 - (NSString *)bulidUrlWithRequest:(fmBaseRequest *)request {
     
     NSString *detailUrl = [request.child requestUrl];

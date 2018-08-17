@@ -10,6 +10,7 @@
 
 typedef NS_ENUM(NSUInteger, fmRequestMethod) {
     fmRequestMethodGET,
+    fmRequestMethodPOST,
 };
 
 typedef NS_ENUM(NSUInteger, fmResponseSerializerType) {
@@ -17,7 +18,8 @@ typedef NS_ENUM(NSUInteger, fmResponseSerializerType) {
     fmResponseSerializerTypeJSON,
     fmResponseSerializerTypeXML,
 };
-
+@protocol AFMultipartFormData;
+typedef void (^AFConstructingBlock)(id <AFMultipartFormData>formData);
 @class fmBaseRequest;
 typedef void(^fmRequestCompletionBlock)(__kindof fmBaseRequest *request);
 
@@ -35,7 +37,7 @@ typedef void(^fmRequestCompletionBlock)(__kindof fmBaseRequest *request);
 @property(nonatomic, strong, readonly) id<fmRequestProtocol> child;
 ///JSON转译之后的数据
 @property(nonatomic, strong, readonly) id responseJSONObject;
-///其他方式转译之后的数据
+///原始数据或其他方式转译之后的数据
 @property(nonatomic, strong, readonly) id responseObject;
 ///原始数据
 @property(nonatomic, strong, readonly) NSData *responseData;
@@ -49,6 +51,8 @@ typedef void(^fmRequestCompletionBlock)(__kindof fmBaseRequest *request);
 - (NSString *)baseUrl;
 - (fmResponseSerializerType)responseSerializerType;
 - (NSInteger)timeoutInterval;
+
+- (AFConstructingBlock)constructingBlock;
 
 - (BOOL)statusCodeValidator:(NSError * __autoreleasing *)error;
 - (id)encryptParameters:(id)params error:(NSError * _Nullable __autoreleasing *)error;

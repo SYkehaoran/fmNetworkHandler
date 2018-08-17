@@ -48,6 +48,11 @@
     return 60;
 }
 
+- (AFConstructingBlock)constructingBlock {
+
+    return nil;
+}
+
 - (BOOL)statusCodeValidator:(NSError * __autoreleasing *)error {
     
     
