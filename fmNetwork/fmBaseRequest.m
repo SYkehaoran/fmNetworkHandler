@@ -43,6 +43,12 @@
 - (fmResponseSerializerType)responseSerializerType {
     return fmResponseSerializerTypeJSON;
 }
+- (NSString *)downloadPath {
+    return nil;
+}
+- (AFURLSessionTaskProgressBlock)downloadProgressBlock {
+    return nil;
+}
 
 - (NSInteger)timeoutInterval {
     return 60;

@@ -29,6 +29,7 @@ static fmNetworkAgent *_instance = nil;
     if (!_jsonResponseSerializer) {
         
         _jsonResponseSerializer = [AFJSONResponseSerializer serializer];
+  
     }
     return _jsonResponseSerializer;
 }
@@ -57,6 +58,7 @@ static fmNetworkAgent *_instance = nil;
         _config = [fmNetworkConfig sharedConfig];
         _manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:_config.sessionConfig];
         _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        
         pthread_mutex_init(&_lock, NULL);
         _requestsRecord = [NSMutableDictionary dictionary];
     }
@@ -110,10 +112,13 @@ static fmNetworkAgent *_instance = nil;
     AFConstructingBlock constructingBlock = [request constructingBlock];
     switch (method) {
         case fmRequestMethodGET:
+            if ([request downloadPath]) {
+                return [self downloadTaskWithPath:[request downloadPath] requestSerializer:requestSerializer URLString:[request.child requestUrl] parameters:parm progress:[request downloadProgressBlock] error:error];
+            }
             return [self dataTaskWithHttpMethod:@"GET" requestSerializer:requestSerializer URLString:url parameters:parm error:error];
             break;
         case fmRequestMethodPOST:
-            return [self dataTaskWithHttpMethod:@"POST" requestSerializer:requestSerializer URLString:url parameters:parm error:error];
+            return [self dataTaskWithHttpMethod:@"POST" requestSerializer:requestSerializer constructingBlock:constructingBlock URLString:url parameters:parm error:error];
             break;
         default:
             break;
@@ -137,6 +142,20 @@ static fmNetworkAgent *_instance = nil;
     }];
     return task;
 }
+
+- (NSURLSessionDownloadTask *)downloadTaskWithPath:(NSString *)downloadPath requestSerializer:(AFHTTPRequestSerializer *)requestSerializer URLString:(NSString *)url parameters:(id)parm progress:(void (^)(NSProgress *downloadProgress))downloadProgressBlock error:(NSError * _Nullable __autoreleasing *)error {
+    
+    NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"GET" URLString:url parameters:parm error:error];
+   __block NSURLSessionDownloadTask *downloadTask = nil;
+   downloadTask = [_manager downloadTaskWithRequest:request progress:downloadProgressBlock destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        return [NSURL fileURLWithPath:downloadPath];
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        [self handlerRequestResult:downloadTask responseObject:filePath error:error];
+    }];
+    
+    return downloadTask;
+}
+
 - (NSURLSessionTask *)dataTaskWithHttpMethod:(NSString *)method requestSerializer:(AFHTTPRequestSerializer *)requestSerializer URLString:(NSString *)url parameters:(id)parm error:(NSError * _Nullable __autoreleasing *)error {
     
     return [self dataTaskWithHttpMethod:method requestSerializer:requestSerializer constructingBlock:nil URLString:url parameters:parm error:error];
@@ -164,6 +183,7 @@ static fmNetworkAgent *_instance = nil;
     NSError *requestError = nil;
     BOOL success = NO;
     
+    request.responseObject = responseObject;
     if ([responseObject isKindOfClass:[NSData class]]) {
         request.responseData = responseObject;
         switch ([request responseSerializerType]) {
@@ -203,6 +223,10 @@ static fmNetworkAgent *_instance = nil;
 }
 
 - (BOOL)validateResult:(fmBaseRequest *)request error:(NSError * _Nullable __autoreleasing *)error {
+   
+    if ([request.responseObject isKindOfClass:[NSURL class]]) {
+        return YES;
+    }
     BOOL validate = [request statusCodeValidator:error];
 
     return validate;

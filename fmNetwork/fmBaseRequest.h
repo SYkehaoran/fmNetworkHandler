@@ -7,7 +7,6 @@
 //
 #import <Foundation/Foundation.h>
 
-
 typedef NS_ENUM(NSUInteger, fmRequestMethod) {
     fmRequestMethodGET,
     fmRequestMethodPOST,
@@ -22,7 +21,7 @@ typedef NS_ENUM(NSUInteger, fmResponseSerializerType) {
 typedef void (^AFConstructingBlock)(id <AFMultipartFormData>formData);
 @class fmBaseRequest;
 typedef void(^fmRequestCompletionBlock)(__kindof fmBaseRequest *request);
-
+typedef void (^AFURLSessionTaskProgressBlock)(NSProgress *progress);
 @protocol fmRequestProtocol
 
 - (NSString *)requestUrl;
@@ -53,6 +52,8 @@ typedef void(^fmRequestCompletionBlock)(__kindof fmBaseRequest *request);
 - (NSInteger)timeoutInterval;
 
 - (AFConstructingBlock)constructingBlock;
+- (NSString *)downloadPath;
+- (AFURLSessionTaskProgressBlock)downloadProgressBlock;
 
 - (BOOL)statusCodeValidator:(NSError * __autoreleasing *)error;
 - (id)encryptParameters:(id)params error:(NSError * _Nullable __autoreleasing *)error;
