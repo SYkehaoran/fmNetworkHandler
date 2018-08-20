@@ -3,7 +3,7 @@
 //  HXFundManager
 //
 //  Created by 柯浩然 on 8/1/18.
-//  Copyright © 2018 柯浩然. All rights reserved.
+//  Copyright © 2018 China Asset Management Co., Ltd. All rights reserved.
 //
 
 #import "fmBaseRequest.h"
@@ -37,7 +37,7 @@
 }
 
 -(NSString *)baseUrl{
-    return @"";
+    return @"http://10.16.0.244:8080/mtrading-fm/";
 }
 
 - (fmResponseSerializerType)responseSerializerType {

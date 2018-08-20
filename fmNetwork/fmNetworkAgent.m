@@ -146,9 +146,27 @@ static fmNetworkAgent *_instance = nil;
 - (NSURLSessionDownloadTask *)downloadTaskWithPath:(NSString *)downloadPath requestSerializer:(AFHTTPRequestSerializer *)requestSerializer URLString:(NSString *)url parameters:(id)parm progress:(void (^)(NSProgress *downloadProgress))downloadProgressBlock error:(NSError * _Nullable __autoreleasing *)error {
     
     NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"GET" URLString:url parameters:parm error:error];
+
+    NSString *downloadTargetPath;
+    BOOL isDirectory = NO;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:downloadPath isDirectory:&isDirectory]) {
+        isDirectory = NO;
+    }
+    
+    if (isDirectory) {
+        downloadTargetPath = [downloadPath stringByAppendingPathComponent:[request.URL lastPathComponent]];
+    }else {
+        downloadTargetPath = downloadPath;
+    }
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:downloadTargetPath]) {
+        [[NSFileManager defaultManager] removeItemAtPath:downloadTargetPath error:error];
+    }
+    
    __block NSURLSessionDownloadTask *downloadTask = nil;
    downloadTask = [_manager downloadTaskWithRequest:request progress:downloadProgressBlock destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-        return [NSURL fileURLWithPath:downloadPath];
+
+       return [NSURL fileURLWithPath:downloadTargetPath isDirectory:NO];
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
         [self handlerRequestResult:downloadTask responseObject:filePath error:error];
     }];
@@ -227,9 +245,8 @@ static fmNetworkAgent *_instance = nil;
     if ([request.responseObject isKindOfClass:[NSURL class]]) {
         return YES;
     }
-    BOOL validate = [request statusCodeValidator:error];
 
-    return validate;
+    return [request statusCodeValidator:error];
 }
 
 - (void)requestDidSuccessRequest:(fmBaseRequest *)request {
