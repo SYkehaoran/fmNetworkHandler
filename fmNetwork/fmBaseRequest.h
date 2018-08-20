@@ -59,13 +59,14 @@ typedef void (^AFURLSessionTaskProgressBlock)(NSProgress *progress);
 - (id)encryptParameters:(id)params error:(NSError * _Nullable __autoreleasing *)error;
 
 - (void)requestDidSuccessComplition;
-- (void)saveResponseToFile:(id)responseObject;
 
 - (void)start;
 - (void)stop;
 - (void)startWithCompletionBlockWithSuccess:(fmRequestCompletionBlock)success failure:(fmRequestCompletionBlock)failure;
 
 - (void)clearCompletionBlock;
+
+- (NSString *)cacheFileNameFilterWithArgument:(id)argument;
 
 ///  Additional HTTP request header field.
 - (nullable NSDictionary<NSString *, NSString *> *)requestHeaderFieldValueDictionary;

@@ -12,10 +12,8 @@
 @interface fmRequest : fmBaseRequest<fmRequestProtocol>
 
 @property(nonatomic, assign) BOOL ignoreCache;
-
+@property(nonatomic, assign) BOOL cacheResponseData;
 - (BOOL)loadCacheWithError:(NSError *)error;
-
-- (void)stop;
 
 - (void)startWithOutCache;
 @end
