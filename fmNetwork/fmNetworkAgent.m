@@ -107,13 +107,13 @@ static fmNetworkAgent *_instance = nil;
     
     NSString *url = [self bulidUrlWithRequest:request];
     id parm = [self handleParameterWithRequest:request error:nil];
-    fmRequestMethod method = [request.child requestMethod];
+    fmRequestMethod method = [request requestMethod];
     AFHTTPRequestSerializer *requestSerializer = [self requestSerializerWithRequest:request];
     AFConstructingBlock constructingBlock = [request constructingBlock];
     switch (method) {
         case fmRequestMethodGET:
             if ([request downloadPath]) {
-                return [self downloadTaskWithPath:[request downloadPath] requestSerializer:requestSerializer URLString:[request.child requestUrl] parameters:parm progress:[request downloadProgressBlock] error:error];
+                return [self downloadTaskWithPath:[request downloadPath] requestSerializer:requestSerializer URLString:[request requestUrl] parameters:parm progress:[request downloadProgressBlock] error:error];
             }
             return [self dataTaskWithHttpMethod:@"GET" requestSerializer:requestSerializer URLString:url parameters:parm error:error];
             break;
@@ -267,7 +267,7 @@ static fmNetworkAgent *_instance = nil;
 
 - (NSString *)bulidUrlWithRequest:(fmBaseRequest *)request {
     
-    NSString *detailUrl = [request.child requestUrl];
+    NSString *detailUrl = [request requestUrl];
     
     for (id<fmUrlFilterProtocol> filter in _config.urlFilters) {
         detailUrl = [filter filterWithUrl:detailUrl request:request];
@@ -289,7 +289,7 @@ static fmNetworkAgent *_instance = nil;
 
 - (id)handleParameterWithRequest:(fmBaseRequest *)request error:(NSError * _Nullable __autoreleasing *)error{
 
-    id parm = [request.child requestArgument];
+    id parm = [request requestArgument];
      
     return [request encryptParameters:parm error:error];
 }

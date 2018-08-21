@@ -17,7 +17,6 @@
 
 @interface fmBaseRequest (setter)
 @property(nonatomic, strong, readwrite) NSURLSessionTask *task;
-@property(nonatomic, strong, readwrite) id<fmRequestProtocol> child;
 @property(nonatomic, strong, readwrite) id responseJSONObject;
 @property(nonatomic, strong, readwrite) id responseObject;
 @property(nonatomic, strong, readwrite) NSData *responseData;

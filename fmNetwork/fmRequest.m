@@ -12,7 +12,6 @@
 #import "fmNetworkPrivate.h"
 @interface fmRequest ()
 
-
 @property(nonatomic, strong) NSData *cacheData;
 @property(nonatomic, strong) id cacheJson;
 @property(nonatomic, strong) id cacheXML;
@@ -41,19 +40,6 @@
          return _cacheData;
      }
     return  [super responseObject];
-}
-
-- (NSString *)requestUrl {
-    return [self.child requestUrl];
-}
-
-- (id)requestArgument {
-    return [self.child requestArgument];
-    
-}
-
-- (fmRequestMethod)requestMethod {
-    return  [self.child requestMethod];
 }
 
 - (BOOL)loadCacheWithError:(NSError *)error {
@@ -147,9 +133,9 @@
 
 - (NSString *)getCacheName {
     
-    fmRequestMethod method = [self.child requestMethod];
-    NSString *urlStr = [self.child requestUrl];
-    NSString *argument = [self cacheFileNameFilterWithArgument:[self.child requestArgument]];
+    fmRequestMethod method = [self requestMethod];
+    NSString *urlStr = [self requestUrl];
+    NSString *argument = [self cacheFileNameFilterWithArgument:[self requestArgument]];
     NSString *cacheName = [NSString stringWithFormat:@"Method:%ld,URL:%@,Argument:%@",method,urlStr,argument];
     return [fmNetworkUtils md5StringFromString:cacheName];
 }

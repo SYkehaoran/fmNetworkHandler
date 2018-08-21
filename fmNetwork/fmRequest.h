@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "fmBaseRequest.h"
 
-@interface fmRequest : fmBaseRequest<fmRequestProtocol>
-
+@interface fmRequest : fmBaseRequest
 @property(nonatomic, assign) BOOL ignoreCache;
 @property(nonatomic, assign) BOOL cacheResponseData;
 - (BOOL)loadCacheWithError:(NSError *)error;

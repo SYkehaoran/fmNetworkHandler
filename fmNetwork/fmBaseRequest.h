@@ -22,18 +22,11 @@ typedef void (^AFConstructingBlock)(id <AFMultipartFormData>formData);
 @class fmBaseRequest;
 typedef void(^fmRequestCompletionBlock)(__kindof fmBaseRequest *request);
 typedef void (^AFURLSessionTaskProgressBlock)(NSProgress *progress);
-@protocol fmRequestProtocol
-
-- (NSString *)requestUrl;
-- (fmRequestMethod)requestMethod;
-- (id)requestArgument;
-
-@end
 
 @interface fmBaseRequest : NSObject
 
 @property(nonatomic, strong, readonly) NSURLSessionTask *task;
-@property(nonatomic, strong, readonly) id<fmRequestProtocol> child;
+
 ///JSON转译之后的数据
 @property(nonatomic, strong, readonly) id responseJSONObject;
 ///原始数据或其他方式转译之后的数据
@@ -46,6 +39,9 @@ typedef void (^AFURLSessionTaskProgressBlock)(NSProgress *progress);
 @property(nonatomic, copy, nullable) fmRequestCompletionBlock successCompletionBlock;
 @property(nonatomic, copy, nullable) fmRequestCompletionBlock failureCompletionBlock;
 
+- (NSString *)requestUrl;
+- (fmRequestMethod)requestMethod;
+- (NSString *)requestArgument;
 
 - (NSString *)baseUrl;
 - (fmResponseSerializerType)responseSerializerType;
